@@ -20,10 +20,11 @@ fun String.obfuscate(
     androidTreatment: Boolean = defaultAndroidTreatment,
     version: Version = defaultVersion
 ): String {
-    val androidTreatmentStr = androidTreatment.toString()
-    val versionStr = version.toString()
-    return SC.obfuscate("$this$androidTreatmentStr$versionStr")
+    val androidTreatmentStr = androidTreatment.toString().toCharArray()
+    val versionStr = version.toString().toCharArray()
+    return SC.obfuscate("$this${androidTreatmentStr.joinToString("")}${versionStr.joinToString("")}")
 }
+
 
 fun String.reveal(
         androidTreatment: Boolean = defaultAndroidTreatment,
