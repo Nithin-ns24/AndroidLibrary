@@ -17,9 +17,13 @@ fun Int.reveal(
 ): String = SC.reveal(this, androidTreatment, version, formatArgs)
 
 fun String.obfuscate(
-        androidTreatment: Boolean = defaultAndroidTreatment,
-        version: Version = defaultVersion
-): String = SC.obfuscate(this, androidTreatment, version)
+    androidTreatment: Boolean = defaultAndroidTreatment,
+    version: Version = defaultVersion
+): String {
+    val androidTreatmentStr = androidTreatment.toString()
+    val versionStr = version.toString()
+    return SC.obfuscate("$this$androidTreatmentStr$versionStr")
+}
 
 fun String.reveal(
         androidTreatment: Boolean = defaultAndroidTreatment,
