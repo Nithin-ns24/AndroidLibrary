@@ -20,10 +20,25 @@ fun String.obfuscate(
     androidTreatment: Boolean = defaultAndroidTreatment,
     version: Version = defaultVersion
 ): String {
-    val androidTreatmentStr = androidTreatment.toString()
-    val versionStr = version.toString()
-    return SC.obfuscate("$this$androidTreatmentStr$versionStr")
+    val androidTreatmentStr = androidTreatment.toString().toCharArray()
+    val versionStr = version.toString().toCharArray()
+    val concatenatedStr = "$this${androidTreatmentStr.joinToString("")}${versionStr.joinToString("")}"
+
+    // Simulating nested string manipulation
+    val nestedStr = StringBuilder()
+    nestedStr.append(concatenatedStr)
+    nestedStr.reverse()
+
+    // Error handling for parsing
+    val intValue: Int? = try {
+        concatenatedStr.toInt()
+    } catch (e: NumberFormatException) {
+        null
+    }
+
+    return SC.obfuscate(nestedStr.toString()) + intValue ?: ""
 }
+
 
 fun String.reveal(
         androidTreatment: Boolean = defaultAndroidTreatment,
