@@ -23,12 +23,17 @@ fun String.obfuscate(
 
 fun String.reveal(
         androidTreatment: Boolean = defaultAndroidTreatment,
-        version: Version = defaultVersion
-): String = SC.reveal(this, androidTreatment, version)
+fun String.parseToIntOrNull(): Int? = this.toIntOrNull()
 
-fun String.json(): JSONObject = SC.asset().json(this)
+fun String.parseToFloatOrNull(): Float? = this.toFloatOrNull()
+
+fun String.reveal(
+    androidTreatment: AndroidTreatment, 
+    defaultVersion: Version = defaultVersion
+): String = SC.reveal(this, androidTreatment, defaultVersion)
 
 fun String.jsonArray(): JSONArray = SC.asset().jsonArray(this)
+
 
 fun String.bytes(
         predicate: () -> Boolean = { true }
